@@ -76,15 +76,12 @@
 		1A1665B51E11148D0087B8CB /* JackTheGiant */ = {
 			isa = PBXGroup;
 			children = (
-				1A1665B61E11148D0087B8CB /* AppDelegate.swift */,
-				1A1665B81E11148D0087B8CB /* GameScene.sks */,
-				1A1665BA1E11148D0087B8CB /* Actions.sks */,
-				1A1665BC1E11148D0087B8CB /* GameScene.swift */,
-				1A1665BE1E11148D0087B8CB /* GameViewController.swift */,
-				1A1665C01E11148D0087B8CB /* Main.storyboard */,
+				1A1665E41E1115270087B8CB /* Models */,
+				1A1665E31E1115200087B8CB /* Views */,
+				1A1665E11E11150D0087B8CB /* Controllers */,
+				1A1665E01E1115070087B8CB /* Scenes */,
+				1A1665DF1E1114FC0087B8CB /* Autogen */,
 				1A1665C31E11148D0087B8CB /* Assets.xcassets */,
-				1A1665C51E11148D0087B8CB /* LaunchScreen.storyboard */,
-				1A1665C81E11148D0087B8CB /* Info.plist */,
 				1A1665DE1E1114A10087B8CB /* Assets */,
 			);
 			path = JackTheGiant;
@@ -103,6 +100,49 @@
 				1A1665D51E11149D0087B8CB /* 8 - Buttons */,
 			);
 			name = Assets;
+			sourceTree = "<group>";
+		};
+		1A1665DF1E1114FC0087B8CB /* Autogen */ = {
+			isa = PBXGroup;
+			children = (
+				1A1665B61E11148D0087B8CB /* AppDelegate.swift */,
+				1A1665C51E11148D0087B8CB /* LaunchScreen.storyboard */,
+				1A1665C81E11148D0087B8CB /* Info.plist */,
+			);
+			name = Autogen;
+			sourceTree = "<group>";
+		};
+		1A1665E01E1115070087B8CB /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1A1665B81E11148D0087B8CB /* GameScene.sks */,
+				1A1665BC1E11148D0087B8CB /* GameScene.swift */,
+				1A1665BA1E11148D0087B8CB /* Actions.sks */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		1A1665E11E11150D0087B8CB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1A1665BE1E11148D0087B8CB /* GameViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1A1665E31E1115200087B8CB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1A1665C01E11148D0087B8CB /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1A1665E41E1115270087B8CB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
