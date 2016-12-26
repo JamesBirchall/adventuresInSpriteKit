@@ -55,6 +55,8 @@
 		1A1666431E11179A0087B8CB /* Options Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A1666191E11179A0087B8CB /* Options Button.png */; };
 		1A1666441E11179A0087B8CB /* Quit Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A16661A1E11179A0087B8CB /* Quit Button.png */; };
 		1A1666451E11179A0087B8CB /* Start Game Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A16661B1E11179A0087B8CB /* Start Game Button.png */; };
+		1A1666481E1118EA0087B8CB /* GameplayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1666471E1118EA0087B8CB /* GameplayScene.swift */; };
+		1A16664A1E111A500087B8CB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1666491E111A500087B8CB /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,8 @@
 		1A1666191E11179A0087B8CB /* Options Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Options Button.png"; sourceTree = "<group>"; };
 		1A16661A1E11179A0087B8CB /* Quit Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Quit Button.png"; sourceTree = "<group>"; };
 		1A16661B1E11179A0087B8CB /* Start Game Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Start Game Button.png"; sourceTree = "<group>"; };
+		1A1666471E1118EA0087B8CB /* GameplayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplayScene.swift; sourceTree = "<group>"; };
+		1A1666491E111A500087B8CB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +207,8 @@
 		1A1665E41E1115270087B8CB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1A1666461E1118BA0087B8CB /* Scene Models */,
+				1A1666491E111A500087B8CB /* Player.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -329,6 +335,14 @@
 			path = "3 - Main Menu Buttons";
 			sourceTree = "<group>";
 		};
+		1A1666461E1118BA0087B8CB /* Scene Models */ = {
+			isa = PBXGroup;
+			children = (
+				1A1666471E1118EA0087B8CB /* GameplayScene.swift */,
+			);
+			name = "Scene Models";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -445,7 +459,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A16664A1E111A500087B8CB /* Player.swift in Sources */,
 				1A1665BF1E11148D0087B8CB /* GameViewController.swift in Sources */,
+				1A1666481E1118EA0087B8CB /* GameplayScene.swift in Sources */,
 				1A1665B71E11148D0087B8CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
