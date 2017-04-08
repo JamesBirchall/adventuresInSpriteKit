@@ -57,6 +57,8 @@
 		1A1666451E11179A0087B8CB /* Start Game Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A16661B1E11179A0087B8CB /* Start Game Button.png */; };
 		1A1666481E1118EA0087B8CB /* GameplayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1666471E1118EA0087B8CB /* GameplayScene.swift */; };
 		1A16664A1E111A500087B8CB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1666491E111A500087B8CB /* Player.swift */; };
+		1AE34E461E99261500176219 /* Player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1AE34E451E99261500176219 /* Player.atlas */; };
+		1AE34E481E997D9F00176219 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE34E471E997D9F00176219 /* Background.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +114,8 @@
 		1A16661B1E11179A0087B8CB /* Start Game Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Start Game Button.png"; sourceTree = "<group>"; };
 		1A1666471E1118EA0087B8CB /* GameplayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplayScene.swift; sourceTree = "<group>"; };
 		1A1666491E111A500087B8CB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		1AE34E451E99261500176219 /* Player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Player.atlas; sourceTree = "<group>"; };
+		1AE34E471E997D9F00176219 /* Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,9 +162,10 @@
 		1A1665DE1E1114A10087B8CB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1AE34E451E99261500176219 /* Player.atlas */,
+				1A1665F01E11179A0087B8CB /* Player */,
 				1A1665E71E11179A0087B8CB /* 1 - Pause Panel And Buttons */,
 				1A1665EC1E11179A0087B8CB /* 2 - Collectables */,
-				1A1665F01E11179A0087B8CB /* 3 - Player */,
 				1A1665F91E11179A0087B8CB /* 4 - Clouds */,
 				1A1665FE1E11179A0087B8CB /* 5 - Fonts */,
 				1A1666001E11179A0087B8CB /* 6 - Music */,
@@ -209,6 +214,7 @@
 			children = (
 				1A1666461E1118BA0087B8CB /* Scene Models */,
 				1A1666491E111A500087B8CB /* Player.swift */,
+				1AE34E471E997D9F00176219 /* Background.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -234,7 +240,7 @@
 			path = "2 - Collectables";
 			sourceTree = "<group>";
 		};
-		1A1665F01E11179A0087B8CB /* 3 - Player */ = {
+		1A1665F01E11179A0087B8CB /* Player */ = {
 			isa = PBXGroup;
 			children = (
 				1A1665F11E11179A0087B8CB /* Player 1.png */,
@@ -246,6 +252,7 @@
 				1A1665F71E11179A0087B8CB /* Player 7.png */,
 				1A1665F81E11179A0087B8CB /* Player 8.png */,
 			);
+			name = Player;
 			path = "3 - Player";
 			sourceTree = "<group>";
 		};
@@ -370,7 +377,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "James Birchall";
 				TargetAttributes = {
 					1A1665B21E11148D0087B8CB = {
@@ -441,6 +448,7 @@
 				1A16662E1E11179A0087B8CB /* Dark Cloud.png in Resources */,
 				1A16661F1E11179A0087B8CB /* Show Score.png in Resources */,
 				1A1666241E11179A0087B8CB /* Player 2.png in Resources */,
+				1AE34E461E99261500176219 /* Player.atlas in Resources */,
 				1A16663E1E11179A0087B8CB /* Hard Button.png in Resources */,
 				1A1666391E11179A0087B8CB /* Ready.png in Resources */,
 				1A1666441E11179A0087B8CB /* Quit Button.png in Resources */,
@@ -463,6 +471,7 @@
 				1A1665BF1E11148D0087B8CB /* GameViewController.swift in Sources */,
 				1A1666481E1118EA0087B8CB /* GameplayScene.swift in Sources */,
 				1A1665B71E11148D0087B8CB /* AppDelegate.swift in Sources */,
+				1AE34E481E997D9F00176219 /* Background.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +515,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -555,6 +565,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -624,6 +635,7 @@
 				1A1665CD1E11148D0087B8CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

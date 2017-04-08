@@ -85,6 +85,8 @@ class GameViewController: UIViewController {
         
         // ugly ass way of getting my segment selection data to set static shape type!
         // what a hack!
+        // could really have a parameter in the class object that when its updated knows to start drawing
+        // different shapes
         
         if let view = self.view as! SKView? {
             // SKView inherits from UIView, but then adds to its functionality

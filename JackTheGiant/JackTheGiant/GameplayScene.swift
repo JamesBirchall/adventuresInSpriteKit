@@ -10,30 +10,35 @@ import SpriteKit
 
 class GameplayScene: SKScene {
     
+    var mainCamera: SKCameraNode?
+    
+    var background1: Background?
+    var background2: Background?
+    var background3: Background?
+    
     var player: Player? // may not be in scene
     var canMove = false
     var moveLeft = false
     var centre: CGFloat?
     
     override func didMove(to view: SKView) {
-        print("Scene was loaded")
-        
-        centre = (self.scene?.size.width)! / (self.scene?.size.height)!
-        
-        player = self.childNode(withName: "Player") as! Player? // uses value in class name
+        initVariables()
     }
     
     override func update(_ currentTime: TimeInterval) {
+        moveCamera()
         managePlayer()
+        manageBackgrounds()
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             if touch.location(in: self).x > centre! {
                 moveLeft = false
+                player?.animatePlayer(moveLeft: false)
             } else {
                 moveLeft = true
+                player?.animatePlayer(moveLeft: true)
             }
         }
         
@@ -43,11 +48,41 @@ class GameplayScene: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         canMove = false
+        player?.stopPlayerAnimation()
+    }
+    
+    func initVariables() {
+        print("Scene was loaded")
+        
+        centre = (self.scene?.size.width)! / (self.scene?.size.height)!
+        
+        player = self.childNode(withName: "Player") as! Player? // uses value in class name
+        player?.initPlayerAndAnimation()
+        
+        mainCamera = self.childNode(withName: "Main_Camera") as? SKCameraNode
+        getBackgrounds()
+    }
+    
+    func getBackgrounds() {
+        background1 = self.childNode(withName: "Background1") as? Background
+        background2 = self.childNode(withName: "Background2") as? Background
+        background3 = self.childNode(withName: "Background3") as? Background
+    }
+    
+    func manageBackgrounds() {
+        background1?.moveBackground(camera: mainCamera!)
+        background2?.moveBackground(camera: mainCamera!)
+        background3?.moveBackground(camera: mainCamera!)
     }
     
     func managePlayer() {
         if canMove {
             player?.movePlayer(moveLeft: moveLeft)
         }
+        player?.movePlayerDown()
+    }
+    
+    func moveCamera() {
+        self.mainCamera?.position.y -= 3
     }
 }
