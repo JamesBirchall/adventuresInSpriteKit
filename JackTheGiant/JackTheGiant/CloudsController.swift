@@ -13,6 +13,11 @@ class CloudsController {
     
     var lastCloudPositionY = CGFloat()
     
+    func shuffle(cloudsArray: inout [SKSpriteNode]) {
+
+        cloudsArray.shuffle()
+    }
+    
     func createClouds() -> [SKSpriteNode] {
         var clouds = [SKSpriteNode]()
         
@@ -43,10 +48,17 @@ class CloudsController {
             clouds.append(darkCloud)
         }
         
+        shuffle(cloudsArray: &clouds)
+        
         return clouds
     }
     
-    func arrangeCloudsInScene(scene: SKScene, distanceBetweenClounds: CGFloat, centre: CGFloat, minX: CGFloat, maxX: CGFloat, initialClouds: Bool) {
+    func arrangeCloudsInScene(scene: SKScene,
+                              distanceBetweenClounds: CGFloat,
+                              centre: CGFloat,
+                              minX: CGFloat,
+                              maxX: CGFloat,
+                              initialClouds: Bool) {
         
         var clouds = createClouds()
         
@@ -54,7 +66,8 @@ class CloudsController {
         
         if initialClouds {
             while clouds[0].name == "DarkCloud" {
-                // shuffle the array as dark cloud cannot be first one!
+                
+                shuffle(cloudsArray: &clouds)
             }
             
             positionY = centre - 100
@@ -71,5 +84,29 @@ class CloudsController {
         }
         
         
+    }
+}
+
+extension MutableCollection where Indices.Iterator.Element == Index {
+    /// Shuffles the contents of this collection.
+    mutating func shuffle() {
+        let c = count
+        guard c > 1 else { return }
+        
+        for (firstUnshuffled , unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
+            let d: IndexDistance = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
+            guard d != 0 else { continue }
+            let i = index(firstUnshuffled, offsetBy: d)
+            swap(&self[firstUnshuffled], &self[i])
+        }
+    }
+}
+
+extension Sequence {
+    /// Returns an array with the contents of this sequence, shuffled.
+    func shuffled() -> [Iterator.Element] {
+        var result = Array(self)
+        result.shuffle()
+        return result
     }
 }
