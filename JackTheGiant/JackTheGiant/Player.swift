@@ -55,8 +55,4 @@ class Player: SKSpriteNode {
             self.position.x += 7
         }
     }
-    
-    func movePlayerDown() {
-        self.position.y -= 3
-    }
 }

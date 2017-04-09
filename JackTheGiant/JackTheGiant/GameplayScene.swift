@@ -16,10 +16,15 @@ class GameplayScene: SKScene {
     var background2: Background?
     var background3: Background?
     
+    var cloudsController = CloudsController()
+    
     var player: Player? // may not be in scene
     var canMove = false
     var moveLeft = false
     var centre: CGFloat?
+    var distanceBeteenClouds = CGFloat(240)
+    let minX = CGFloat(85)
+    let maxX = CGFloat(392)
     
     override func didMove(to view: SKView) {
         initVariables()
@@ -61,6 +66,7 @@ class GameplayScene: SKScene {
         
         mainCamera = self.childNode(withName: "Main_Camera") as? SKCameraNode
         getBackgrounds()
+        cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: true)
     }
     
     func getBackgrounds() {
@@ -79,7 +85,6 @@ class GameplayScene: SKScene {
         if canMove {
             player?.movePlayer(moveLeft: moveLeft)
         }
-        player?.movePlayerDown()
     }
     
     func moveCamera() {
