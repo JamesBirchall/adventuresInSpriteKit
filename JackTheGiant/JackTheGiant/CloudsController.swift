@@ -15,7 +15,16 @@ class CloudsController {
     
     func shuffle(cloudsArray: inout [SKSpriteNode]) {
 
-        cloudsArray.shuffle()
+        // check if first cloud is dark cloud and whilst it is randomise the order
+        for (i, _) in cloudsArray.enumerated() {
+            // loop through and swap elements
+            // iteration 1 = get random number between 0 & count
+            // then move cloud to that position in array
+            let rand = Int(arc4random_uniform(UInt32(cloudsArray.count-1)))
+            if i != rand {
+                swap(&cloudsArray[i], &cloudsArray[rand])
+            }
+        }
     }
     
     func createClouds() -> [SKSpriteNode] {
@@ -84,29 +93,5 @@ class CloudsController {
         }
         
         
-    }
-}
-
-extension MutableCollection where Indices.Iterator.Element == Index {
-    /// Shuffles the contents of this collection.
-    mutating func shuffle() {
-        let c = count
-        guard c > 1 else { return }
-        
-        for (firstUnshuffled , unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
-            let d: IndexDistance = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
-            guard d != 0 else { continue }
-            let i = index(firstUnshuffled, offsetBy: d)
-            swap(&self[firstUnshuffled], &self[i])
-        }
-    }
-}
-
-extension Sequence {
-    /// Returns an array with the contents of this sequence, shuffled.
-    func shuffled() -> [Iterator.Element] {
-        var result = Array(self)
-        result.shuffle()
-        return result
     }
 }
