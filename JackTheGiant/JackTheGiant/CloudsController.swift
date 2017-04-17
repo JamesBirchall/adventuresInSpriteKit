@@ -14,7 +14,8 @@ class CloudsController {
     var lastCloudPositionY = CGFloat()
     
     func shuffle(cloudsArray: inout [SKSpriteNode]) {
-
+        
+        print("Clouds Array Size = \(cloudsArray.count-1)") // clouds array is current 7 in size!
         // check if first cloud is dark cloud and whilst it is randomise the order
         for (i, _) in cloudsArray.enumerated() {
             // loop through and swap elements
@@ -25,6 +26,20 @@ class CloudsController {
                 swap(&cloudsArray[i], &cloudsArray[rand])
             }
         }
+    }
+    
+    func randomBetweenNumbers(first: CGFloat, second: CGFloat) -> CGFloat {
+        
+        // get random number between 0-1 by taking arc4random and dividing by its max value
+        var randomNumber = (CGFloat(arc4random()) / CGFloat(UINT32_MAX))
+        
+        // multiply this by the distance between the 2 numbers
+        randomNumber *= abs(first - second)
+        
+        // add the lesser value so the range is between the 2 original provided numbers
+        randomNumber += min(first, second)
+        
+        return randomNumber
     }
     
     func createClouds() -> [SKSpriteNode] {
@@ -75,7 +90,6 @@ class CloudsController {
         
         if initialClouds {
             while clouds[0].name == "DarkCloud" {
-                
                 shuffle(cloudsArray: &clouds)
             }
             
@@ -84,8 +98,21 @@ class CloudsController {
             positionY = lastCloudPositionY
         }
         
+        var random = 0
+        
         for cloud in clouds {
-            cloud.position = CGPoint(x: 0, y: positionY)
+            
+            var randomX = CGFloat()
+            
+            if random == 0 {
+                randomX = randomBetweenNumbers(first: centre+90, second: maxX)
+                random = 1
+            } else if random == 1 {
+                randomX = randomBetweenNumbers(first: centre-90, second: minX)
+                random = 0
+            }
+            
+            cloud.position = CGPoint(x: randomX, y: positionY)
             cloud.zPosition = 3
             scene.addChild(cloud)
             positionY -= distanceBetweenClounds

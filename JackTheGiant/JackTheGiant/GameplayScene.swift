@@ -23,8 +23,8 @@ class GameplayScene: SKScene {
     var moveLeft = false
     var centre: CGFloat?
     var distanceBeteenClouds = CGFloat(240)
-    let minX = CGFloat(85)
-    let maxX = CGFloat(392)
+    let minX = CGFloat(-160)
+    let maxX = CGFloat(160)
     
     override func didMove(to view: SKView) {
         initVariables()
@@ -67,6 +67,8 @@ class GameplayScene: SKScene {
         mainCamera = self.childNode(withName: "Main_Camera") as? SKCameraNode
         getBackgrounds()
         cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: true)
+        
+        // print("The random number is \(cloudsController.randomBetweenNumbers(first: 2, second: 5))")
     }
     
     func getBackgrounds() {
