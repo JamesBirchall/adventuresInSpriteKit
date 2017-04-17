@@ -58,6 +58,7 @@
 		1A1666481E1118EA0087B8CB /* GameplayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1666471E1118EA0087B8CB /* GameplayScene.swift */; };
 		1A16664A1E111A500087B8CB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1666491E111A500087B8CB /* Player.swift */; };
 		1AD08C561E9AB09300439D99 /* CloudsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD08C551E9AB09300439D99 /* CloudsController.swift */; };
+		1ADFF89D1EA532DE00DA3FCB /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1ADFF89C1EA532DE00DA3FCB /* MainMenuScene.sks */; };
 		1AE34E461E99261500176219 /* Player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1AE34E451E99261500176219 /* Player.atlas */; };
 		1AE34E481E997D9F00176219 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE34E471E997D9F00176219 /* Background.swift */; };
 /* End PBXBuildFile section */
@@ -116,6 +117,7 @@
 		1A1666471E1118EA0087B8CB /* GameplayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplayScene.swift; sourceTree = "<group>"; };
 		1A1666491E111A500087B8CB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		1AD08C551E9AB09300439D99 /* CloudsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudsController.swift; sourceTree = "<group>"; };
+		1ADFF89C1EA532DE00DA3FCB /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
 		1AE34E451E99261500176219 /* Player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Player.atlas; sourceTree = "<group>"; };
 		1AE34E471E997D9F00176219 /* Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				1A1665E51E1115B20087B8CB /* GameplayScene.sks */,
+				1ADFF89C1EA532DE00DA3FCB /* MainMenuScene.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				1A1666241E11179A0087B8CB /* Player 2.png in Resources */,
 				1AE34E461E99261500176219 /* Player.atlas in Resources */,
 				1A16663E1E11179A0087B8CB /* Hard Button.png in Resources */,
+				1ADFF89D1EA532DE00DA3FCB /* MainMenuScene.sks in Resources */,
 				1A1666391E11179A0087B8CB /* Ready.png in Resources */,
 				1A1666441E11179A0087B8CB /* Quit Button.png in Resources */,
 				1A16663A1E11179A0087B8CB /* Score.png in Resources */,
