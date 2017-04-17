@@ -65,6 +65,35 @@ class CloudsController {
             darkCloud.yScale = 0.9
             
             // add physics bodies to clouds
+            // need to make the collision box a little smaller than the cloud
+            let cloud1Size = CGSize(width: cloud1.size.width * 0.9, height: cloud1.size.height * 0.7)
+            let cloud2Size = CGSize(width: cloud2.size.width * 0.9, height: cloud2.size.height * 0.7)
+            let cloud3Size = CGSize(width: cloud3.size.width * 0.9, height: cloud3.size.height * 0.7)
+            let darkCloudSize = CGSize(width: darkCloud.size.width * 0.9, height: darkCloud.size.height * 0.7)
+            cloud1.physicsBody = SKPhysicsBody(rectangleOf: cloud1Size)
+            cloud2.physicsBody = SKPhysicsBody(rectangleOf: cloud2Size)
+            cloud3.physicsBody = SKPhysicsBody(rectangleOf: cloud3Size)
+            darkCloud.physicsBody = SKPhysicsBody(rectangleOf: darkCloudSize)
+            
+            // they don't get affected by Gravity
+            cloud1.physicsBody?.affectedByGravity = false
+            cloud2.physicsBody?.affectedByGravity = false
+            cloud3.physicsBody?.affectedByGravity = false
+            darkCloud.physicsBody?.affectedByGravity = false
+            
+            // is of a Cloud type so player can collide with use
+            cloud1.physicsBody?.categoryBitMask = ColliderType.cloud
+            cloud2.physicsBody?.categoryBitMask = ColliderType.cloud
+            cloud3.physicsBody?.categoryBitMask = ColliderType.cloud
+            darkCloud.physicsBody?.categoryBitMask = ColliderType.darkCloudAndCollectables
+            
+            // collide with the player
+            cloud1.physicsBody?.collisionBitMask = ColliderType.player
+            cloud2.physicsBody?.collisionBitMask = ColliderType.player
+            cloud3.physicsBody?.collisionBitMask = ColliderType.player
+            darkCloud.physicsBody?.collisionBitMask = ColliderType.player
+            
+            
             
             clouds.append(cloud1)
             clouds.append(cloud2)

@@ -8,6 +8,13 @@
 
 import SpriteKit
 
+// masks for Physics collision bit masks
+struct ColliderType {
+    static let player: UInt32 = 0
+    static let cloud: UInt32 = 1
+    static let darkCloudAndCollectables: UInt32 = 2
+}
+
 // inherit spriteNode as we are a sprite node!
 class Player: SKSpriteNode {
     
@@ -24,6 +31,14 @@ class Player: SKSpriteNode {
             let texture = SKTexture(imageNamed: name)
             playerAnimation.append(texture)
         }
+        
+        physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        physicsBody?.affectedByGravity = true
+        physicsBody?.categoryBitMask = ColliderType.player
+        physicsBody?.collisionBitMask = ColliderType.cloud // collide with Cloud but not any action needed as its a physics body as well
+        physicsBody?.contactTestBitMask = ColliderType.darkCloudAndCollectables // inform player didBeginContactFunction
+        physicsBody?.allowsRotation = false
+        physicsBody?.restitution = 0
         
         playerAnimationAction = SKAction.animate(with: playerAnimation, timePerFrame: 0.08, resize: true, restore: false)
     }
