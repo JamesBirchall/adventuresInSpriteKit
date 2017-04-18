@@ -59,6 +59,7 @@
 		1A16664A1E111A500087B8CB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1666491E111A500087B8CB /* Player.swift */; };
 		1AD08C561E9AB09300439D99 /* CloudsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD08C551E9AB09300439D99 /* CloudsController.swift */; };
 		1ADFF89D1EA532DE00DA3FCB /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1ADFF89C1EA532DE00DA3FCB /* MainMenuScene.sks */; };
+		1ADFF89F1EA6AFA100DA3FCB /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADFF89E1EA6AFA100DA3FCB /* MainMenuScene.swift */; };
 		1AE34E461E99261500176219 /* Player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1AE34E451E99261500176219 /* Player.atlas */; };
 		1AE34E481E997D9F00176219 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE34E471E997D9F00176219 /* Background.swift */; };
 /* End PBXBuildFile section */
@@ -118,6 +119,7 @@
 		1A1666491E111A500087B8CB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		1AD08C551E9AB09300439D99 /* CloudsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudsController.swift; sourceTree = "<group>"; };
 		1ADFF89C1EA532DE00DA3FCB /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
+		1ADFF89E1EA6AFA100DA3FCB /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		1AE34E451E99261500176219 /* Player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Player.atlas; sourceTree = "<group>"; };
 		1AE34E471E997D9F00176219 /* Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -352,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				1A1666471E1118EA0087B8CB /* GameplayScene.swift */,
+				1ADFF89E1EA6AFA100DA3FCB /* MainMenuScene.swift */,
 			);
 			name = "Scene Models";
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				1A1666481E1118EA0087B8CB /* GameplayScene.swift in Sources */,
 				1AD08C561E9AB09300439D99 /* CloudsController.swift in Sources */,
 				1A1665B71E11148D0087B8CB /* AppDelegate.swift in Sources */,
+				1ADFF89F1EA6AFA100DA3FCB /* MainMenuScene.swift in Sources */,
 				1AE34E481E997D9F00176219 /* Background.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
