@@ -12,6 +12,6 @@ class MainMenuScene: SKScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
-        print("View Shown..")
+        print("Main Menu Shown")
     }
 }

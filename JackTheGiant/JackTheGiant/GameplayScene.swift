@@ -30,6 +30,7 @@ class GameplayScene: SKScene {
     let maxX = CGFloat(160)
     
     override func didMove(to view: SKView) {
+        print("Gameplay Screen Shown")
         initVariables()
     }
     
