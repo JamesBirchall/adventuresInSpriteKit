@@ -56,6 +56,7 @@
 		1A1666451E11179A0087B8CB /* Start Game Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A16661B1E11179A0087B8CB /* Start Game Button.png */; };
 		1A1666481E1118EA0087B8CB /* GameplayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1666471E1118EA0087B8CB /* GameplayScene.swift */; };
 		1A16664A1E111A500087B8CB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1666491E111A500087B8CB /* Player.swift */; };
+		1A5BAB6C1EA72E2600FA932F /* blow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A5BAB6B1EA72E2600FA932F /* blow.ttf */; };
 		1AD08C561E9AB09300439D99 /* CloudsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD08C551E9AB09300439D99 /* CloudsController.swift */; };
 		1ADFF89D1EA532DE00DA3FCB /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1ADFF89C1EA532DE00DA3FCB /* MainMenuScene.sks */; };
 		1ADFF89F1EA6AFA100DA3FCB /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADFF89E1EA6AFA100DA3FCB /* MainMenuScene.swift */; };
@@ -117,12 +118,12 @@
 		1A16661B1E11179A0087B8CB /* Start Game Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Start Game Button.png"; sourceTree = "<group>"; };
 		1A1666471E1118EA0087B8CB /* GameplayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplayScene.swift; sourceTree = "<group>"; };
 		1A1666491E111A500087B8CB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		1A5BAB6B1EA72E2600FA932F /* blow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = blow.ttf; sourceTree = "<group>"; };
 		1AD08C551E9AB09300439D99 /* CloudsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudsController.swift; sourceTree = "<group>"; };
 		1ADFF89C1EA532DE00DA3FCB /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
 		1ADFF89E1EA6AFA100DA3FCB /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		1ADFF8A01EA6B23200DA3FCB /* HighscoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HighscoreScene.sks; sourceTree = "<group>"; };
 		1ADFF8A21EA6B2BC00DA3FCB /* HighscoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighscoreScene.swift; sourceTree = "<group>"; };
-		1ADFF8A41EA6B50800DA3FCB /* blow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = blow.ttf; sourceTree = "<group>"; };
 		1AE34E451E99261500176219 /* Player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Player.atlas; sourceTree = "<group>"; };
 		1AE34E471E997D9F00176219 /* Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,12 +172,12 @@
 		1A1665DE1E1114A10087B8CB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				1ADFF8A41EA6B50800DA3FCB /* blow.ttf */,
 				1AE34E451E99261500176219 /* Player.atlas */,
 				1A1665F01E11179A0087B8CB /* Player */,
 				1A1665E71E11179A0087B8CB /* 1 - Pause Panel And Buttons */,
 				1A1665EC1E11179A0087B8CB /* 2 - Collectables */,
 				1A1665F91E11179A0087B8CB /* 4 - Clouds */,
+				1A5BAB6A1EA72E2600FA932F /* 5 - Fonts */,
 				1A1666001E11179A0087B8CB /* 6 - Music */,
 				1A1666051E11179A0087B8CB /* 7 - Backgrounds */,
 				1A16660A1E11179A0087B8CB /* 8 - Buttons */,
@@ -356,6 +357,14 @@
 			name = "Scene Models";
 			sourceTree = "<group>";
 		};
+		1A5BAB6A1EA72E2600FA932F /* 5 - Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1A5BAB6B1EA72E2600FA932F /* blow.ttf */,
+			);
+			path = "5 - Fonts";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -430,6 +439,7 @@
 				1A1666351E11179A0087B8CB /* Highscore BG.png in Resources */,
 				1A1666451E11179A0087B8CB /* Start Game Button.png in Resources */,
 				1A16661C1E11179A0087B8CB /* Pause Menu.png in Resources */,
+				1A5BAB6C1EA72E2600FA932F /* blow.ttf in Resources */,
 				1A1666331E11179A0087B8CB /* Life Sound.wav in Resources */,
 				1A16662D1E11179A0087B8CB /* Cloud 3.png in Resources */,
 				1A1666261E11179A0087B8CB /* Player 4.png in Resources */,
