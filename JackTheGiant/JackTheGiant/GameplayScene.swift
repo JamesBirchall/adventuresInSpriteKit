@@ -16,6 +16,7 @@ class GameplayScene: SKScene {
     var background2: Background?
     var background3: Background?
     var pauseButton: SKSpriteNode?
+    var pausePanel: SKSpriteNode?
     
     var cloudsController = CloudsController()
     
@@ -23,6 +24,7 @@ class GameplayScene: SKScene {
     var canMove = false
     var moveLeft = false
     var centre: CGFloat?
+    var pauseMenuShown = false
     
     private var cameraDistanceBeforeCreatingNewClouds = CGFloat()
     
@@ -43,8 +45,16 @@ class GameplayScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            if touch.location(in: self).x > centre! {
+        
+        for touch in touches {
+            let location = touch.location(in: self)
+            
+            if atPoint(location).name == "PauseButton" {
+                pauseGame()
+                return
+            }
+            
+            if location.x > centre! {
                 moveLeft = false
                 player?.animatePlayer(moveLeft: false)
             } else {
@@ -52,15 +62,10 @@ class GameplayScene: SKScene {
                 player?.animatePlayer(moveLeft: true)
             }
         }
-        
-        for touch in touches {
-            let location = touch.location(in: self)
+
             
-            if atPoint(location).name == pauseButton?.name {
-                pauseGame() // we want to pause the game here..
-            }
-        }
-        
+
+
         canMove = true
     }
     
@@ -108,7 +113,9 @@ class GameplayScene: SKScene {
     }
     
     func moveCamera() {
-        self.mainCamera?.position.y -= 2
+        if !pauseMenuShown {
+            self.mainCamera?.position.y -= 2
+        }
     }
     
     func createClouds() {
@@ -122,5 +129,37 @@ class GameplayScene: SKScene {
     
     func pauseGame() {
         
+        if !pauseMenuShown {
+            createPausePanel()
+        } else {
+            // remove the panels nodes to save space
+        }
+    }
+    
+    func createPausePanel() {
+        pausePanel = SKSpriteNode(imageNamed: "Pause Menu")
+        pausePanel?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        //pausePanel?.scale(to: CGSize(width: 1.6, height: 1.6))
+        pausePanel?.zPosition = 4
+        pausePanel?.position = CGPoint(x: (mainCamera?.frame.width)! / 2, y: (mainCamera?.frame.height)! / 2)
+        print("Pause Panel Setup")
+        
+        
+        let resumeButton = SKSpriteNode(imageNamed: "Resume Button")
+        resumeButton.name = "ResumeButton"
+        resumeButton.zPosition = 5
+        resumeButton.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        resumeButton.position = CGPoint(x: (pausePanel?.position.x)!, y: (pausePanel?.position.y)! + 25)
+        pausePanel?.addChild(resumeButton)
+        
+        let quitButton = SKSpriteNode(imageNamed: "Quit Button 2")
+        quitButton.name = "Quit Button"
+        quitButton.zPosition = 5
+        quitButton.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        quitButton.position = CGPoint(x: (pausePanel?.position.x)!, y: (pausePanel?.position.y)! - 45)
+        pausePanel?.addChild(quitButton)
+        
+        self.mainCamera?.addChild(pausePanel!)
+        pauseMenuShown = true
     }
 }
