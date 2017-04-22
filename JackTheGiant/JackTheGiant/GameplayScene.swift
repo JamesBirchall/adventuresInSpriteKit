@@ -15,6 +15,7 @@ class GameplayScene: SKScene {
     var background1: Background?
     var background2: Background?
     var background3: Background?
+    var pauseButton: SKSpriteNode?
     
     var cloudsController = CloudsController()
     
@@ -52,6 +53,14 @@ class GameplayScene: SKScene {
             }
         }
         
+        for touch in touches {
+            let location = touch.location(in: self)
+            
+            if atPoint(location).name == pauseButton?.name {
+                pauseGame() // we want to pause the game here..
+            }
+        }
+        
         canMove = true
     }
     
@@ -66,16 +75,18 @@ class GameplayScene: SKScene {
         
         centre = (self.scene?.size.width)! / (self.scene?.size.height)!
         
-        player = self.childNode(withName: "Player") as! Player? // uses value in class name
+        player = childNode(withName: "Player") as! Player? // uses value in class name
         player?.initPlayerAndAnimation()
         
-        mainCamera = self.childNode(withName: "Main_Camera") as? SKCameraNode
+        mainCamera = childNode(withName: "Main_Camera") as? SKCameraNode
         getBackgrounds()
         cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: true)
         
         // print("The random number is \(cloudsController.randomBetweenNumbers(first: 2, second: 5))")
         
         cameraDistanceBeforeCreatingNewClouds = (mainCamera?.position.y)! - 400
+        
+        pauseButton = childNode(withName: "PauseButton") as? SKSpriteNode
     }
     
     func getBackgrounds() {
@@ -107,5 +118,9 @@ class GameplayScene: SKScene {
             
             cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: false)
         }
+    }
+    
+    func pauseGame() {
+        
     }
 }

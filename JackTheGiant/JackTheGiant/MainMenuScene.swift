@@ -14,7 +14,6 @@ class MainMenuScene: SKScene {
         case start
         case highscore
         case option
-        case quit
     }
     
     private var startButton: SKSpriteNode?
@@ -40,16 +39,14 @@ class MainMenuScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             
-            for node in nodes(at: location) {
-                switch node {
-                case startButton!:
+            if let nodePoint = atPoint(location).name {
+                switch nodePoint {
+                case "StartButton":
                     showScene(option: .start)
-                case highscoreButton!:
+                case "HighscoreButton":
                     showScene(option: .highscore)
-                case optionsButton!:
+                case "OptionsButton":
                     showScene(option: .option)
-                case quitButton!:
-                    print("Exit Button Pressed.")
                 default:
                     break
                 }
@@ -67,8 +64,6 @@ class MainMenuScene: SKScene {
             scene = HighscoreScene(fileNamed: "HighscoreScene")
         case .option:
             scene = OptionsScene(fileNamed: "OptionsScene")
-        default:
-            break
         }
         
         if scene != nil {
