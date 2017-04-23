@@ -12,6 +12,8 @@ class GameManager {
     static let sharedInstance = GameManager()
     private init(){ }
     
+    private var gameData: GameData?
+    
     var gameStartedFromMainMenu = false
     var gameRestartedPlayerDied = false
 }

@@ -42,4 +42,24 @@ class GameplayController {
             lifeText?.text = "x\(lifeScore!)"
         }
     }
+    
+    func incrementScore() {
+        score! += 1
+        scoreText?.text = "\(score!)"
+    }
+    
+    func incrementCoin() {
+        coinScore! += 1
+        score! += 200
+        scoreText?.text = "\(score!)"
+        coinText?.text = "x\(coinScore!)"
+        print("Increment Coin")
+    }
+    
+    func incrementLife() {
+        lifeScore! += 1
+        score! += 300
+        scoreText?.text = "\(score!)"
+        lifeText?.text = "x\(lifeScore!)"
+    }
 }

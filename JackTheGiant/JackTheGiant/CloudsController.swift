@@ -150,9 +150,11 @@ class CloudsController {
                 if Int(randomBetweenNumbers(first: 0, second: 7)) >= 3 {
                     if cloud.name != "DarkCloud" {
                         let collectable = collectableController.getCollectables()
-                        collectable.position = CGPoint(x: cloud.position.x, y: cloud.position.y + 60)
-                        
-                        scene.addChild(collectable)
+                        if collectable.name != nil {
+                            // we dont want to be adding nil named collectables - they are non-existant nodes
+                            collectable.position = CGPoint(x: cloud.position.x, y: cloud.position.y + 60)
+                            scene.addChild(collectable)
+                        }
                     }
                 }
             }
@@ -161,7 +163,5 @@ class CloudsController {
             positionY -= distanceBetweenClounds
             lastCloudPositionY = positionY
         }
-        
-        
     }
 }

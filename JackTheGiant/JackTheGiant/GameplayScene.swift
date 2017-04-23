@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameplayScene: SKScene {
+class GameplayScene: SKScene, SKPhysicsContactDelegate {
     
     private enum Scenes {
         case mainMenu
@@ -28,6 +28,8 @@ class GameplayScene: SKScene {
     var canMove = false
     var moveLeft = false
     var centre: CGFloat?
+    private let playerMinX = CGFloat(-214)
+    private let playerMaxX = CGFloat(214)
     
     private var cameraDistanceBeforeCreatingNewClouds = CGFloat()
     
@@ -45,6 +47,7 @@ class GameplayScene: SKScene {
         managePlayer()
         manageBackgrounds()
         createClouds()  // check and create new clouds if camera has moved so far
+        player?.setScore()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -98,6 +101,8 @@ class GameplayScene: SKScene {
     func initVariables() {
         print("Scene was loaded")
         
+        physicsWorld.contactDelegate = self
+        
         centre = (self.scene?.size.width)! / (self.scene?.size.height)!
         
         player = childNode(withName: "Player") as! Player? // uses value in class name
@@ -135,6 +140,23 @@ class GameplayScene: SKScene {
         if canMove {
             player?.movePlayer(moveLeft: moveLeft)
         }
+        
+        if (player?.position.y)! - (player?.size.height)! * 3.7 > (mainCamera?.position.y)! {
+            print("Player is out of bounds up.")
+            self.scene?.isPaused = true
+        }
+        if (player?.position.y)! + (player?.size.height)! * 3.7 < (mainCamera?.position.y)! {
+            print("Player is out of bounds down.")
+            self.scene?.isPaused = true
+        }
+        
+        // stop player from going outside left and right sides - could also be done by physics box around the main camera - though that would mean top/bottom hit
+        if (player?.position.x)! < playerMinX {
+            player?.position.x = playerMinX
+        }
+        if (player?.position.x)! > playerMaxX {
+            player?.position.x = playerMaxX
+        }
     }
     
     func moveCamera() {
@@ -148,12 +170,14 @@ class GameplayScene: SKScene {
             
             cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: false)
         }
+        
+        childNodeOutOfBounds()
     }
     
     func getLabels() {
         GameplayController.sharedInstance.scoreText = mainCamera?.childNode(withName: "ScoreLabel") as? SKLabelNode
-        GameplayController.sharedInstance.coinText = mainCamera?.childNode(withName: "LifeLabel") as? SKLabelNode
-        GameplayController.sharedInstance.lifeText = mainCamera?.childNode(withName: "CoinsLabel") as? SKLabelNode
+        GameplayController.sharedInstance.coinText = mainCamera?.childNode(withName: "CoinsLabel") as? SKLabelNode
+        GameplayController.sharedInstance.lifeText = mainCamera?.childNode(withName: "LifeLabel") as? SKLabelNode
     }
     
     func pauseGame() {
@@ -205,5 +229,52 @@ class GameplayScene: SKScene {
     deinit {
         // showing us that this scene and its objects are de-allocated
         print("Gameplay Scene was deallocated.")
+    }
+    
+    // MARK: Physics World Contact Delegate Methods
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        var firstBody: SKPhysicsBody?   // Player body variable
+        var secondBody: SKPhysicsBody?  // what Player hit!
+        
+        if contact.bodyA.node?.name == "Player" {
+            // either player is the first object
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            // of the second object!
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if firstBody?.node?.name == "Player" && secondBody?.node?.name == "Life" {
+            // deal with contact for life (Remove Life Node and add Life to player)
+            GameplayController.sharedInstance.incrementLife()
+            
+            secondBody?.node?.removeFromParent()
+        } else if firstBody?.node?.name == "Player" && secondBody?.node?.name == "Coin" {
+            // deal with contact
+            GameplayController.sharedInstance.incrementCoin()
+            secondBody?.node?.removeFromParent()
+        } else if firstBody?.node?.name == "Player" && secondBody?.node?.name == "DarkCloud" {
+            // kill the player
+        }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        //
+    }
+    
+    func childNodeOutOfBounds() {
+        for child in children {
+            if child.position.y > (mainCamera?.position.y)! + (self.scene?.size.height)! {
+                if !(child.name?.contains("Background"))! {
+                    
+                    print("Removing child: \(child.name!)")
+                    // we know its not a background
+                    child.removeFromParent()
+                }
+            }
+        }
     }
 }
