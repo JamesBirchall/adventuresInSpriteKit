@@ -104,7 +104,12 @@ class GameplayScene: SKScene {
         player?.initPlayerAndAnimation()
         
         mainCamera = childNode(withName: "Main_Camera") as? SKCameraNode
+        
         getBackgrounds()
+        getLabels()
+        
+        GameplayController.sharedInstance.initialiseVariables()
+        
         cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: true)
         
         // print("The random number is \(cloudsController.randomBetweenNumbers(first: 2, second: 5))")
@@ -143,6 +148,12 @@ class GameplayScene: SKScene {
             
             cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: false)
         }
+    }
+    
+    func getLabels() {
+        GameplayController.sharedInstance.scoreText = mainCamera?.childNode(withName: "ScoreLabel") as? SKLabelNode
+        GameplayController.sharedInstance.coinText = mainCamera?.childNode(withName: "LifeLabel") as? SKLabelNode
+        GameplayController.sharedInstance.lifeText = mainCamera?.childNode(withName: "CoinsLabel") as? SKLabelNode
     }
     
     func pauseGame() {

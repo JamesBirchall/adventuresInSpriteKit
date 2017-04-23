@@ -42,6 +42,7 @@ class MainMenuScene: SKScene {
             if let nodePoint = atPoint(location).name {
                 switch nodePoint {
                 case "StartButton":
+                    GameManager.sharedInstance.gameStartedFromMainMenu = true
                     showScene(option: .start)
                 case "HighscoreButton":
                     showScene(option: .highscore)
