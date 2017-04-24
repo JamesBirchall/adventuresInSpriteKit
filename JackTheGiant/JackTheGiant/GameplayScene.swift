@@ -271,6 +271,14 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             secondBody?.node?.removeFromParent()
         } else if firstBody?.node?.name == "Player" && secondBody?.node?.name == "DarkCloud" {
             // kill the player
+            scene?.isPaused = true
+            GameplayController.sharedInstance.decrementLife()
+            if GameplayController.sharedInstance.lifeScore! > 0 {
+                GameplayController.sharedInstance.updateLifeScore()
+            } else {
+                // show score panel
+            }
+            playerDied()
         }
     }
     
@@ -304,6 +312,52 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             acceleration = 0.003
             cameraSpeed = 2.5
             maxSpeed = 8
+        }
+    }
+    
+    func playerDied() {
+        if GameplayController.sharedInstance.lifeScore! >= 0 {
+            
+            GameManager.sharedInstance.gameRestartedPlayerDied = true
+            
+            weak var scene = GameplayScene(fileNamed: "GameplayScene")
+            scene!.scaleMode = .aspectFill
+            self.view?.presentScene(scene!, transition: .doorway(withDuration: 0.5))
+        } else {
+            if GameManager.sharedInstance.getEasyDifficulty() {
+                let highscore = Int(GameManager.sharedInstance.getEasyDifficultyScore())
+                let coinHighscore = Int(GameManager.sharedInstance.getEasyDifficultyCoinScore())
+                if highscore < GameplayController.sharedInstance.score! {
+                    GameManager.sharedInstance.setEasyDifficultyScore(easyDifficultyScore: Int32(highscore))
+                }
+                if coinHighscore < GameplayController.sharedInstance.coinScore! {
+                    GameManager.sharedInstance.setEasyDifficultyCoinScore(easyDifficultyScore: Int32(coinHighscore))
+                }
+            } else if GameManager.sharedInstance.getMediumDifficulty() {
+                let highscore = Int(GameManager.sharedInstance.getMediumDifficultyScore())
+                let coinHighscore = Int(GameManager.sharedInstance.getMediumDifficultyCoinScore())
+                if highscore < GameplayController.sharedInstance.score! {
+                    GameManager.sharedInstance.setMediumDifficultyScore(mediumDifficultyScore: Int32(highscore))
+                }
+                if coinHighscore < GameplayController.sharedInstance.coinScore! {
+                    GameManager.sharedInstance.setMediumDifficultyCoinScore(mediumDifficultyScore: Int32(coinHighscore))
+                }
+            } else if GameManager.sharedInstance.getHardDifficulty() {
+                let highscore = Int(GameManager.sharedInstance.getHardDifficultyScore())
+                let coinHighscore = Int(GameManager.sharedInstance.getHardDifficultyCoinScore())
+                if highscore < GameplayController.sharedInstance.score! {
+                    GameManager.sharedInstance.setHardDifficultyScore(hardDifficultyScore: Int32(highscore))
+                }
+                if coinHighscore < GameplayController.sharedInstance.coinScore! {
+                    GameManager.sharedInstance.setHardDifficultyCoinScore(hardDifficultyScore: Int32(coinHighscore))
+                }
+            }
+            
+            GameManager.sharedInstance.saveData()
+            
+            weak var scene = GameplayScene(fileNamed: "MainMenuScene")
+            scene!.scaleMode = .aspectFill
+            self.view?.presentScene(scene!, transition: .doorway(withDuration: 0.5))
         }
     }
 }

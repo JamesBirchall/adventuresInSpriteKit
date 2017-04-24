@@ -62,4 +62,13 @@ class GameplayController {
         scoreText?.text = "\(score!)"
         lifeText?.text = "x\(lifeScore!)"
     }
+    
+    func decrementLife() {
+        lifeScore! -= 1
+        
+    }
+    
+    func updateLifeScore() {
+        lifeText?.text = "x\(lifeScore!)"
+    }
 }
