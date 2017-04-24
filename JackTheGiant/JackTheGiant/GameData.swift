@@ -19,7 +19,10 @@ class GameData: NSObject, NSCoding {
         static let mediumDifficultyCoinScore = "MediumDifficultyCoinScore"
         static let hardDifficultyCoinScore = "HardDifficultyCoinScore"
         
-        static let difficulty = "Difficulty"
+        static let EasyDifficulty = "EasyDifficulty"
+        static let MediumDifficulty = "MediumDifficulty"
+        static let HardDifficulty = "HardDifficulty"
+        
         static let music = "Music"
     }
     
@@ -31,13 +34,11 @@ class GameData: NSObject, NSCoding {
     private var mediumDifficultyCoinScore = Int32()
     private var hardDifficultyCoinScore = Int32()
     
-    private var difficulty: difficultySettings?
+    private var easyDifficulty = false
+    private var mediumDifficulty = false
+    private var hardDifficulty = false
     
-    public enum difficultySettings {
-        case easy
-        case medium
-        case hard
-    }
+    private var isMusicOn = false
     
     override init() { }
     
@@ -51,8 +52,10 @@ class GameData: NSObject, NSCoding {
         easyDifficultyCoinScore = aDecoder.decodeInt32(forKey: Keys.easyDifficultyCoinScore)
         mediumDifficultyCoinScore = aDecoder.decodeInt32(forKey: Keys.mediumDifficultyCoinScore)
         hardDifficultyCoinScore = aDecoder.decodeInt32(forKey: Keys.hardDifficultyCoinScore)
-        difficulty = aDecoder.decodeObject(forKey: Keys.difficulty) as? difficultySettings
-        musicOn = aDecoder.decodeBool(forKey: Keys.music)
+        easyDifficulty = aDecoder.decodeBool(forKey: Keys.EasyDifficulty);
+        mediumDifficulty = aDecoder.decodeBool(forKey: Keys.MediumDifficulty);
+        hardDifficulty = aDecoder.decodeBool(forKey: Keys.HardDifficulty);
+        isMusicOn = aDecoder.decodeBool(forKey: Keys.music)
         
     }
     
@@ -64,11 +67,12 @@ class GameData: NSObject, NSCoding {
         aCoder.encode(easyDifficultyCoinScore, forKey: Keys.easyDifficultyCoinScore)
         aCoder.encode(mediumDifficultyCoinScore, forKey: Keys.mediumDifficultyCoinScore)
         aCoder.encode(hardDifficultyCoinScore, forKey: Keys.hardDifficultyCoinScore)
-        aCoder.encode(difficulty, forKey: Keys.difficulty)  // assuming Int by default!
-        aCoder.encode(musicOn, forKey: Keys.music)
+        aCoder.encode(easyDifficulty, forKey: Keys.EasyDifficulty);
+        aCoder.encode(mediumDifficulty, forKey: Keys.MediumDifficulty);
+        aCoder.encode(hardDifficulty, forKey: Keys.HardDifficulty);
+        
+        aCoder.encode(isMusicOn, forKey: Keys.music)
     }
-    
-    private var musicOn = false
     
     func setEasyDifficultyScore(_ easyScore: Int32) {
         easyDifficultyScore = easyScore
@@ -108,27 +112,36 @@ class GameData: NSObject, NSCoding {
         return hardDifficultyCoinScore
     }
     
-    func toggleMusic() {
-        if musicOn {
-            musicOn = false
-        } else {
-            musicOn = true
-        }
+    func setEasyDifficulty(_ easyDifficulty: Bool) {
+        self.easyDifficulty = easyDifficulty
     }
     
-    func isMusicOn() -> Bool {
-        return musicOn
+    func getEasyDifficulty() -> Bool {
+        return self.easyDifficulty
     }
     
-    func setDifficulty(_ diffSetting: difficultySettings) {
-        difficulty = diffSetting
+    func setMediumDifficulty(_ mediumDifficulty: Bool) {
+        self.mediumDifficulty = mediumDifficulty
     }
     
-    func getDifficulty() -> difficultySettings {
-        if difficulty != nil {
-            return difficulty!
-        } else {
-            return difficultySettings.easy  // default to easy mode
-        }
+    func getMediumDifficulty() -> Bool {
+        return self.mediumDifficulty
     }
+    
+    func setHardDifficulty(_ hardDifficulty: Bool) {
+        self.hardDifficulty = hardDifficulty
+    }
+    
+    func getHardDifficulty() -> Bool {
+        return self.hardDifficulty
+    }
+    
+    func setIsMusicOn(_ isMusicOn: Bool) {
+        self.isMusicOn = isMusicOn
+    }
+    
+    func getIsMusicOn() -> Bool {
+        return self.isMusicOn
+    }
+
 }

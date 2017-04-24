@@ -15,6 +15,9 @@ class HighscoreScene: SKScene {
     }
     
     private var backButton: SKSpriteNode?
+    private var highScore: SKLabelNode?
+    private var coinScore: SKLabelNode?
+    private var difficultyLabel: SKLabelNode?
     
     override func didMove(to view: SKView) {
         print("Highscore Shown")
@@ -39,6 +42,25 @@ class HighscoreScene: SKScene {
 //        }
         
         backButton = self.childNode(withName: "BackButton") as? SKSpriteNode
+        highScore = self.childNode(withName: "HighscoreLabel") as? SKLabelNode
+        coinScore = self.childNode(withName: "CoinLabel") as? SKLabelNode
+        difficultyLabel = self.childNode(withName: "DifficultyLabel") as? SKLabelNode
+        
+        // set depending on difficulty relevent scores
+        
+        if GameManager.sharedInstance.getEasyDifficulty() {
+            highScore?.text = "\(GameManager.sharedInstance.getEasyDifficultyScore())"
+            coinScore?.text = "\(GameManager.sharedInstance.getEasyDifficultyCoinScore())"
+            difficultyLabel?.text = "Easy Highscores"
+        } else if GameManager.sharedInstance.getMediumDifficulty() {
+            highScore?.text = "\(GameManager.sharedInstance.getMediumDifficultyScore())"
+            coinScore?.text = "\(GameManager.sharedInstance.getMediumDifficultyCoinScore())"
+            difficultyLabel?.text = "Medium Highscores"
+        } else if GameManager.sharedInstance.getHardDifficulty() {
+            highScore?.text = "\(GameManager.sharedInstance.getHardDifficultyScore())"
+            coinScore?.text = "\(GameManager.sharedInstance.getHardDifficultyCoinScore())"
+            difficultyLabel?.text = "Hard Highscores"
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

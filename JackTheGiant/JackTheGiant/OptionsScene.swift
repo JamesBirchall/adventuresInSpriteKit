@@ -9,6 +9,11 @@
 import SpriteKit
 
 class OptionsScene: SKScene {
+    
+    private var easyButton: SKSpriteNode?
+    private var mediumButton: SKSpriteNode?
+    private var hardButton: SKSpriteNode?
+    private var checkSign: SKSpriteNode?
 
     private enum Scenes {
         case mainMenu
@@ -20,6 +25,39 @@ class OptionsScene: SKScene {
         super.didMove(to: view)
         
         backButton = self.childNode(withName: "BackButton") as? SKSpriteNode
+        
+        easyButton = self.childNode(withName: "EasyButton") as? SKSpriteNode
+        mediumButton = self.childNode(withName: "MediumButton") as? SKSpriteNode
+        hardButton = self.childNode(withName: "HardButton") as? SKSpriteNode
+        checkSign = self.childNode(withName: "CheckSign") as? SKSpriteNode
+        
+        // setup the sign depending on current difficulty
+        if GameManager.sharedInstance.getEasyDifficulty() {
+            checkSign?.position.y = (easyButton?.position.y)!
+        } else if GameManager.sharedInstance.getMediumDifficulty() {
+            checkSign?.position.y = (mediumButton?.position.y)!
+        } else if GameManager.sharedInstance.getHardDifficulty() {
+            checkSign?.position.y = (hardButton?.position.y)!
+        }
+    }
+    
+    private func setDifficulty(difficulty: Int) {
+        switch difficulty {
+        case 0:
+            GameManager.sharedInstance.setEasyDifficulty(true)
+            GameManager.sharedInstance.setMediumDifficulty(false)
+            GameManager.sharedInstance.setHardDifficulty(false)
+        case 1:
+            GameManager.sharedInstance.setEasyDifficulty(false)
+            GameManager.sharedInstance.setMediumDifficulty(true)
+            GameManager.sharedInstance.setHardDifficulty(false)
+        case 2:
+            GameManager.sharedInstance.setEasyDifficulty(false)
+            GameManager.sharedInstance.setMediumDifficulty(false)
+            GameManager.sharedInstance.setHardDifficulty(true)
+        default:
+            break
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -30,7 +68,17 @@ class OptionsScene: SKScene {
             if let nodePoint = atPoint(location).name {
                 switch nodePoint {
                 case "BackButton":
+                    GameManager.sharedInstance.saveData()   // save latest settings
                     showScene(option: .mainMenu)
+                case "EasyButton":
+                    checkSign?.position.y = (easyButton?.position.y)!
+                    setDifficulty(difficulty: 0)
+                case "MediumButton":
+                    checkSign?.position.y = (mediumButton?.position.y)!
+                    setDifficulty(difficulty: 1)
+                case "HardButton":
+                    checkSign?.position.y = (hardButton?.position.y)!
+                    setDifficulty(difficulty: 2)
                 default:
                     break
                 }

@@ -26,6 +26,10 @@ class MainMenuScene: SKScene {
         
         print("Main Menu Shown")
         
+        GameManager.sharedInstance.initialiseGameData() // start game data and save to disk
+        
+        
+        
         // setup buttons
         startButton = self.childNode(withName: "StartButton") as? SKSpriteNode
         highscoreButton = self.childNode(withName: "HighscoreButton") as? SKSpriteNode
