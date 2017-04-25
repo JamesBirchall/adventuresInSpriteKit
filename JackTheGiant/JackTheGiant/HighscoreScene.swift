@@ -51,6 +51,8 @@ class HighscoreScene: SKScene {
         if GameManager.sharedInstance.getEasyDifficulty() {
             highScore?.text = "\(GameManager.sharedInstance.getEasyDifficultyScore())"
             coinScore?.text = "\(GameManager.sharedInstance.getEasyDifficultyCoinScore())"
+            
+            // print("Game Score: \(highScore!.text) CoinScore: \(coinScore!.text)")
             difficultyLabel?.text = "Easy Highscores"
         } else if GameManager.sharedInstance.getMediumDifficulty() {
             highScore?.text = "\(GameManager.sharedInstance.getMediumDifficultyScore())"

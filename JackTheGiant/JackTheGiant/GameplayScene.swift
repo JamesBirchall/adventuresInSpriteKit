@@ -150,11 +150,29 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         
         if (player?.position.y)! - (player?.size.height)! * 3.7 > (mainCamera?.position.y)! {
             print("Player is out of bounds up.")
-            self.scene?.isPaused = true
+            // kill the player
+            scene?.isPaused = true
+            GameplayController.sharedInstance.decrementLife()
+            if GameplayController.sharedInstance.lifeScore! > 0 {
+                GameplayController.sharedInstance.updateLifeScore()
+            } else {
+                // show score panel
+            }
+            
+            Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(playerDied), userInfo: nil, repeats: false)
         }
         if (player?.position.y)! + (player?.size.height)! * 3.7 < (mainCamera?.position.y)! {
             print("Player is out of bounds down.")
-            self.scene?.isPaused = true
+            // kill the player
+            scene?.isPaused = true
+            GameplayController.sharedInstance.decrementLife()
+            if GameplayController.sharedInstance.lifeScore! > 0 {
+                GameplayController.sharedInstance.updateLifeScore()
+            } else {
+                // show score panel
+            }
+            
+            Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(playerDied), userInfo: nil, repeats: false)
         }
         
         // stop player from going outside left and right sides - could also be done by physics box around the main camera - though that would mean top/bottom hit
@@ -278,7 +296,11 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 // show score panel
             }
-            playerDied()
+            
+            firstBody?.node?.removeFromParent() // remove the player
+            
+            Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(playerDied), userInfo: nil, repeats: false)
+            
         }
     }
     
@@ -327,33 +349,37 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             if GameManager.sharedInstance.getEasyDifficulty() {
                 let highscore = Int(GameManager.sharedInstance.getEasyDifficultyScore())
                 let coinHighscore = Int(GameManager.sharedInstance.getEasyDifficultyCoinScore())
+                print("Highscore: \(GameplayController.sharedInstance.score! ) COinScore: \(GameplayController.sharedInstance.coinScore!)")
                 if highscore < GameplayController.sharedInstance.score! {
-                    GameManager.sharedInstance.setEasyDifficultyScore(easyDifficultyScore: Int32(highscore))
+                    GameManager.sharedInstance.setEasyDifficultyScore(easyDifficultyScore: Int32(GameplayController.sharedInstance.score!))
                 }
                 if coinHighscore < GameplayController.sharedInstance.coinScore! {
-                    GameManager.sharedInstance.setEasyDifficultyCoinScore(easyDifficultyScore: Int32(coinHighscore))
+                    GameManager.sharedInstance.setEasyDifficultyCoinScore(easyDifficultyScore: Int32(GameplayController.sharedInstance.coinScore!))
                 }
+                print("Saved Easy Difficulty")
             } else if GameManager.sharedInstance.getMediumDifficulty() {
                 let highscore = Int(GameManager.sharedInstance.getMediumDifficultyScore())
                 let coinHighscore = Int(GameManager.sharedInstance.getMediumDifficultyCoinScore())
+                
                 if highscore < GameplayController.sharedInstance.score! {
-                    GameManager.sharedInstance.setMediumDifficultyScore(mediumDifficultyScore: Int32(highscore))
+                    GameManager.sharedInstance.setMediumDifficultyScore(mediumDifficultyScore: Int32(GameplayController.sharedInstance.score!))
                 }
                 if coinHighscore < GameplayController.sharedInstance.coinScore! {
-                    GameManager.sharedInstance.setMediumDifficultyCoinScore(mediumDifficultyScore: Int32(coinHighscore))
+                    GameManager.sharedInstance.setMediumDifficultyCoinScore(mediumDifficultyScore: Int32(GameplayController.sharedInstance.coinScore!))
                 }
             } else if GameManager.sharedInstance.getHardDifficulty() {
                 let highscore = Int(GameManager.sharedInstance.getHardDifficultyScore())
                 let coinHighscore = Int(GameManager.sharedInstance.getHardDifficultyCoinScore())
                 if highscore < GameplayController.sharedInstance.score! {
-                    GameManager.sharedInstance.setHardDifficultyScore(hardDifficultyScore: Int32(highscore))
+                    GameManager.sharedInstance.setHardDifficultyScore(hardDifficultyScore: Int32(GameplayController.sharedInstance.score!))
                 }
                 if coinHighscore < GameplayController.sharedInstance.coinScore! {
-                    GameManager.sharedInstance.setHardDifficultyCoinScore(hardDifficultyScore: Int32(coinHighscore))
+                    GameManager.sharedInstance.setHardDifficultyCoinScore(hardDifficultyScore: Int32(GameplayController.sharedInstance.coinScore!))
                 }
             }
             
             GameManager.sharedInstance.saveData()
+            print("Save Game Data... in gameplay Scene")
             
             weak var scene = GameplayScene(fileNamed: "MainMenuScene")
             scene!.scaleMode = .aspectFill
