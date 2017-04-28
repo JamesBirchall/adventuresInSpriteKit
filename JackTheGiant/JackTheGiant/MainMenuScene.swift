@@ -20,6 +20,7 @@ class MainMenuScene: SKScene {
     private var highscoreButton: SKSpriteNode?
     private var optionsButton: SKSpriteNode?
     private var quitButton: SKSpriteNode?
+    private var musicButton: SKSpriteNode?
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -28,13 +29,14 @@ class MainMenuScene: SKScene {
         
         GameManager.sharedInstance.initialiseGameData() // start game data and save to disk
         
-        
-        
         // setup buttons
         startButton = self.childNode(withName: "StartButton") as? SKSpriteNode
         highscoreButton = self.childNode(withName: "HighscoreButton") as? SKSpriteNode
         optionsButton = self.childNode(withName: "OptionsButton") as? SKSpriteNode
         quitButton = self.childNode(withName: "QuitButton") as? SKSpriteNode
+        musicButton = self.childNode(withName: "SoundButton") as? SKSpriteNode
+        
+        AudioManager.sharedInstance.playBackgroundMusic()   // initialise
         
     }
     
@@ -52,6 +54,15 @@ class MainMenuScene: SKScene {
                     showScene(option: .highscore)
                 case "OptionsButton":
                     showScene(option: .option)
+                case "SoundButton":
+                    if AudioManager.sharedInstance.isPlaying() {
+                        AudioManager.sharedInstance.stopBackgroundMusic()
+                        // musicButton
+                        musicButton?.texture = SKTexture(imageNamed: "Music Off Button")
+                    } else {
+                        AudioManager.sharedInstance.playBackgroundMusic()
+                        musicButton?.texture = SKTexture(imageNamed: "Music On Button")
+                    }
                 default:
                     break
                 }

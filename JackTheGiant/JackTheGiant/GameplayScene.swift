@@ -157,6 +157,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
                 GameplayController.sharedInstance.updateLifeScore()
             } else {
                 // show score panel
+                createEndScorePanel()
             }
             
             Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(playerDied), userInfo: nil, repeats: false)
@@ -243,6 +244,31 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         mainCamera?.addChild(pausePanel!)
     }
     
+    func createEndScorePanel() {
+        let endScorePanel = SKSpriteNode(imageNamed: "Show Score")
+        endScorePanel.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        endScorePanel.zPosition = 20
+        endScorePanel.xScale = 1.5
+        endScorePanel.yScale = 1.5
+        endScorePanel.position = CGPoint(x: (mainCamera?.frame.size.width)!/2, y: (mainCamera?.frame.size.height)!/2)
+        mainCamera?.addChild(endScorePanel)
+        
+        let scoreLabel = SKLabelNode(fontNamed: "Blow")
+        scoreLabel.fontSize = 50
+        scoreLabel.zPosition = 19
+        scoreLabel.position = CGPoint(x: endScorePanel.position.x - 60, y: endScorePanel.position.y + 10)
+        scoreLabel.text = GameplayController.sharedInstance.scoreText?.text
+        endScorePanel.addChild(scoreLabel)
+        
+        let coinLabel = SKLabelNode(fontNamed: "Blow")
+        coinLabel.fontSize = 50
+        coinLabel.zPosition = 19
+        coinLabel.position = CGPoint(x: endScorePanel.position.x - 60, y: endScorePanel.position.y - 105)
+        coinLabel.text = GameplayController.sharedInstance.coinText?.text
+        endScorePanel.addChild(coinLabel)
+        
+    }
+    
     private func showScene(option: Scenes) {
         weak var scene: SKScene!
         
@@ -294,7 +320,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             if GameplayController.sharedInstance.lifeScore! > 0 {
                 GameplayController.sharedInstance.updateLifeScore()
             } else {
-                // show score panel
+                createEndScorePanel()
             }
             
             firstBody?.node?.removeFromParent() // remove the player
