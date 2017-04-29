@@ -22,7 +22,10 @@ class AudioManager {
                 try audioPlayer = AVAudioPlayer(contentsOf: url!)
                 audioPlayer?.numberOfLoops = -1
                 audioPlayer?.prepareToPlay()
-                audioPlayer?.play()
+                
+                if GameManager.sharedInstance.getIsMusicOn() {
+                    audioPlayer?.play()
+                }
             } catch {
                 print("Problem initialising AVAudioPlayer: \(error).")
             }
@@ -37,9 +40,14 @@ class AudioManager {
                 audioPlayer?.stop()
             }
         }
+        
+        GameManager.sharedInstance.setIsMusicOn(false)
+        GameManager.sharedInstance.saveData()   // save state for relaunches.
     }
     
     func isPlaying() -> Bool {
+        GameManager.sharedInstance.setIsMusicOn(true)
+        GameManager.sharedInstance.saveData()
         return (audioPlayer?.isPlaying)!
     }
 }

@@ -36,6 +36,10 @@ class MainMenuScene: SKScene {
         quitButton = self.childNode(withName: "QuitButton") as? SKSpriteNode
         musicButton = self.childNode(withName: "SoundButton") as? SKSpriteNode
         
+        if !GameManager.sharedInstance.getIsMusicOn() {
+            musicButton?.texture = SKTexture(imageNamed: "Music Off Button")
+        }
+        
         AudioManager.sharedInstance.playBackgroundMusic()   // initialise
         
     }
@@ -71,6 +75,9 @@ class MainMenuScene: SKScene {
     }
     
     private func showScene(option: Scenes) {
+        
+        self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
+        
         weak var scene: SKScene!
         
         switch option {

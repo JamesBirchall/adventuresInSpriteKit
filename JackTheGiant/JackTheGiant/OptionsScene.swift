@@ -87,6 +87,9 @@ class OptionsScene: SKScene {
     }
     
     private func showScene(option: Scenes) {
+        
+        self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
+        
         weak var scene: SKScene!
         
         switch option {

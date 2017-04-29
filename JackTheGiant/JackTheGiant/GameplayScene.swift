@@ -120,7 +120,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         
         GameplayController.sharedInstance.initialiseVariables()
         
-        cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: true)
+        cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, player: player!, initialClouds: true)
         
         // print("The random number is \(cloudsController.randomBetweenNumbers(first: 2, second: 5))")
         
@@ -151,13 +151,12 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         if (player?.position.y)! - (player?.size.height)! * 3.7 > (mainCamera?.position.y)! {
             print("Player is out of bounds up.")
             // kill the player
+            scene?.isPaused = false
+            createEndScorePanel()
             scene?.isPaused = true
             GameplayController.sharedInstance.decrementLife()
             if GameplayController.sharedInstance.lifeScore! > 0 {
                 GameplayController.sharedInstance.updateLifeScore()
-            } else {
-                // show score panel
-                createEndScorePanel()
             }
             
             Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(playerDied), userInfo: nil, repeats: false)
@@ -165,12 +164,12 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         if (player?.position.y)! + (player?.size.height)! * 3.7 < (mainCamera?.position.y)! {
             print("Player is out of bounds down.")
             // kill the player
+            scene?.isPaused = false
+            createEndScorePanel()
             scene?.isPaused = true
             GameplayController.sharedInstance.decrementLife()
             if GameplayController.sharedInstance.lifeScore! > 0 {
                 GameplayController.sharedInstance.updateLifeScore()
-            } else {
-                // show score panel
             }
             
             Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(playerDied), userInfo: nil, repeats: false)
@@ -200,7 +199,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             // reset to new distance
             cameraDistanceBeforeCreatingNewClouds = (mainCamera?.position.y)! - 800
             
-            cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: false)
+            cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClounds: distanceBeteenClouds, centre: centre!, minX: minX, maxX: maxX, player: player!, initialClouds: false)
         }
         
         childNodeOutOfBounds()
@@ -270,6 +269,9 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func showScene(option: Scenes) {
+        
+        self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
+        
         weak var scene: SKScene!
         
         switch option {
@@ -306,32 +308,30 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         
         if firstBody?.node?.name == "Player" && secondBody?.node?.name == "Life" {
             // deal with contact for life (Remove Life Node and add Life to player)
+            self.run(SKAction.playSoundFileNamed("Life Sound.wav", waitForCompletion: false))
             GameplayController.sharedInstance.incrementLife()
             
             secondBody?.node?.removeFromParent()
         } else if firstBody?.node?.name == "Player" && secondBody?.node?.name == "Coin" {
             // deal with contact
+            self.run(SKAction.playSoundFileNamed("Coin Sound.wav", waitForCompletion: false))
             GameplayController.sharedInstance.incrementCoin()
             secondBody?.node?.removeFromParent()
         } else if firstBody?.node?.name == "Player" && secondBody?.node?.name == "DarkCloud" {
-            // kill the player
+            
+            scene?.isPaused = false
+            createEndScorePanel()
             scene?.isPaused = true
+            
             GameplayController.sharedInstance.decrementLife()
             if GameplayController.sharedInstance.lifeScore! > 0 {
                 GameplayController.sharedInstance.updateLifeScore()
-            } else {
-                createEndScorePanel()
             }
             
             firstBody?.node?.removeFromParent() // remove the player
             
             Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(playerDied), userInfo: nil, repeats: false)
-            
         }
-    }
-    
-    func didEnd(_ contact: SKPhysicsContact) {
-        //
     }
     
     func childNodeOutOfBounds() {
@@ -364,6 +364,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func playerDied() {
+        
         if GameplayController.sharedInstance.lifeScore! >= 0 {
             
             GameManager.sharedInstance.gameRestartedPlayerDied = true
@@ -375,14 +376,13 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             if GameManager.sharedInstance.getEasyDifficulty() {
                 let highscore = Int(GameManager.sharedInstance.getEasyDifficultyScore())
                 let coinHighscore = Int(GameManager.sharedInstance.getEasyDifficultyCoinScore())
-                print("Highscore: \(GameplayController.sharedInstance.score! ) COinScore: \(GameplayController.sharedInstance.coinScore!)")
+                
                 if highscore < GameplayController.sharedInstance.score! {
                     GameManager.sharedInstance.setEasyDifficultyScore(easyDifficultyScore: Int32(GameplayController.sharedInstance.score!))
                 }
                 if coinHighscore < GameplayController.sharedInstance.coinScore! {
                     GameManager.sharedInstance.setEasyDifficultyCoinScore(easyDifficultyScore: Int32(GameplayController.sharedInstance.coinScore!))
                 }
-                print("Saved Easy Difficulty")
             } else if GameManager.sharedInstance.getMediumDifficulty() {
                 let highscore = Int(GameManager.sharedInstance.getMediumDifficultyScore())
                 let coinHighscore = Int(GameManager.sharedInstance.getMediumDifficultyCoinScore())

@@ -26,7 +26,7 @@ class GameplayController {
             
             GameManager.sharedInstance.gameStartedFromMainMenu = false // reset
             
-            score = 0
+            score = -1
             coinScore = 0
             lifeScore = 2
             

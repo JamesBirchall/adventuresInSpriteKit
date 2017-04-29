@@ -113,6 +113,7 @@ class CloudsController {
                               centre: CGFloat,
                               minX: CGFloat,
                               maxX: CGFloat,
+                              player: Player,
                               initialClouds: Bool) {
         
         var clouds = createClouds()
@@ -162,6 +163,11 @@ class CloudsController {
             scene.addChild(cloud)
             positionY -= distanceBetweenClounds
             lastCloudPositionY = positionY
+            
+            if initialClouds {
+                // set player to standing on the first cloud
+                player.position = CGPoint(x: clouds[0].position.x, y: clouds[0].position.y + 76)
+            }
         }
     }
 }
