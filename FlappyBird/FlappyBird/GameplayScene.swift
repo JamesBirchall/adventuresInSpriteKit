@@ -20,10 +20,17 @@ class GameplayScene: SKScene {
         initialise()
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        for node in children {
+            node.position.x -= 3
+        }
+    }
+    
     // MARK: - Initialise
     private func initialise() {
         
         createBackgrounds()
+        createGround()
     }
     
     private func createBackgrounds() {
@@ -42,6 +49,18 @@ class GameplayScene: SKScene {
             background.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             background.position = CGPoint(x: i * Int(background.size.width), y: 0)
             addChild(background)
+        }
+    }
+    
+    private func createGround() {
+        for i in 0...2 {
+            let ground = SKSpriteNode(imageNamed: "Ground")
+            ground.name = "GroundSpriteNode\(i)"
+            ground.zPosition = 1
+            ground.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+            let yPosition = -(frame.size.height / 2)    // half the size of the screen and negative
+            ground.position = CGPoint(x: i * Int(ground.size.width), y: Int(yPosition))
+            addChild(ground)
         }
     }
 }
