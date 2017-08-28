@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		451599741F5431B1007595CB /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451599731F5431B1007595CB /* Bird.swift */; };
 		454487F81F3F916F0024F2D8 /* Blue 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 454487F41F3F916F0024F2D8 /* Blue 1.png */; };
 		454487F91F3F916F0024F2D8 /* Blue 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 454487F51F3F916F0024F2D8 /* Blue 2.png */; };
 		454487FA1F3F916F0024F2D8 /* Blue 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 454487F61F3F916F0024F2D8 /* Blue 3.png */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		451599731F5431B1007595CB /* Bird.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
 		454487F41F3F916F0024F2D8 /* Blue 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue 1.png"; sourceTree = "<group>"; };
 		454487F51F3F916F0024F2D8 /* Blue 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue 2.png"; sourceTree = "<group>"; };
 		454487F61F3F916F0024F2D8 /* Blue 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue 3.png"; sourceTree = "<group>"; };
@@ -73,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		451599721F54319F007595CB /* BirdClasses */ = {
+			isa = PBXGroup;
+			children = (
+				451599731F5431B1007595CB /* Bird.swift */,
+			);
+			name = BirdClasses;
+			sourceTree = "<group>";
+		};
 		454487F01F3F91470024F2D8 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +157,7 @@
 		454523F21F4710800006CC57 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				451599721F54319F007595CB /* BirdClasses */,
 				454523F71F47113D0006CC57 /* SceneClasses */,
 			);
 			name = Classes;
@@ -294,6 +305,7 @@
 			files = (
 				454523F61F4711380006CC57 /* GameplayScene.swift in Sources */,
 				45F529BA1F3F911900A1EC4C /* GameViewController.swift in Sources */,
+				451599741F5431B1007595CB /* Bird.swift in Sources */,
 				45F529B21F3F911900A1EC4C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

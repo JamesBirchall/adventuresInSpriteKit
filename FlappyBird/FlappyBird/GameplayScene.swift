@@ -10,6 +10,8 @@ import SpriteKit
 
 class GameplayScene: SKScene {
     
+    private var bird: Bird!
+    
     private enum imageNames: String {
         case BackgroundSpriteNode
         case GroundSpriteNode
@@ -37,6 +39,7 @@ class GameplayScene: SKScene {
         
         createBackgrounds()
         createGround()
+        createBird()
     }
     
     private func createBackgrounds() {
@@ -68,6 +71,13 @@ class GameplayScene: SKScene {
             ground.position = CGPoint(x: i * Int(ground.size.width), y: Int(yPosition))
             addChild(ground)
         }
+    }
+    
+    private func createBird() {
+        bird = Bird(imageNamed: "Blue 1")
+        bird.initialise()
+        bird.position = CGPoint(x: -50, y: 0)
+        addChild(bird)
     }
     
     private func moveBackgroundsAndGrounds() {
