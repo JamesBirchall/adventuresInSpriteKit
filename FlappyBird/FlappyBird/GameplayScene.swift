@@ -10,20 +10,26 @@ import SpriteKit
 
 class GameplayScene: SKScene {
     
+    private enum imageNames: String {
+        case BackgroundSpriteNode
+        case GroundSpriteNode
+    }
+    
     let daytime: Bool = {
+        
         // TODO: Add logic here for if its daytime or night time in current timezone.
         return true
     }()
     
     override func didMove(to view: SKView) {
+        
         backgroundColor = UIColor.brown
         initialise()
     }
     
     override func update(_ currentTime: TimeInterval) {
-        for node in children {
-            node.position.x -= 3
-        }
+        
+        moveBackgroundsAndGrounds()
     }
     
     // MARK: - Initialise
@@ -44,7 +50,7 @@ class GameplayScene: SKScene {
         
         for i in 0...2 {
             let background = SKSpriteNode(imageNamed: imageNamed)
-            background.name = "BackgroundSpriteNode\(i)"
+            background.name = imageNames.BackgroundSpriteNode.rawValue
             background.zPosition = 0
             background.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             background.position = CGPoint(x: i * Int(background.size.width), y: 0)
@@ -55,12 +61,35 @@ class GameplayScene: SKScene {
     private func createGround() {
         for i in 0...2 {
             let ground = SKSpriteNode(imageNamed: "Ground")
-            ground.name = "GroundSpriteNode\(i)"
+            ground.name = imageNames.GroundSpriteNode.rawValue
             ground.zPosition = 1
             ground.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             let yPosition = -(frame.size.height / 2)    // half the size of the screen and negative
             ground.position = CGPoint(x: i * Int(ground.size.width), y: Int(yPosition))
             addChild(ground)
+        }
+    }
+    
+    private func moveBackgroundsAndGrounds() {
+        
+        enumerateChildNodes(withName: imageNames.BackgroundSpriteNode.rawValue) { [weak self] (node: SKNode, error: UnsafeMutablePointer<ObjCBool>) in
+            node.position.x -= 4.5
+            
+            if let width = self?.frame.width {
+                if node.position.x <= -(width) {
+                    node.position.x += width * 3
+                }
+            }
+        }
+        
+        enumerateChildNodes(withName: imageNames.GroundSpriteNode.rawValue) { [weak self] (node: SKNode, error: UnsafeMutablePointer<ObjCBool>) in
+            node.position.x -= 4.5
+            
+            if let width = self?.frame.width {
+                if node.position.x <= -(width) {
+                    node.position.x += width * 3
+                }
+            }
         }
     }
 }
