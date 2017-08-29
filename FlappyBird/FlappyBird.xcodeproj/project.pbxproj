@@ -26,6 +26,7 @@
 		454488151F3F91B30024F2D8 /* Score.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 454488121F3F91B30024F2D8 /* Score.mp3 */; };
 		454523F41F4710A70006CC57 /* GameplayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 454523F31F4710A70006CC57 /* GameplayScene.sks */; };
 		454523F61F4711380006CC57 /* GameplayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454523F51F4711380006CC57 /* GameplayScene.swift */; };
+		45997AB61F557E1600EF75FF /* ColliderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45997AB51F557E1600EF75FF /* ColliderType.swift */; };
 		45F529B21F3F911900A1EC4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F529B11F3F911900A1EC4C /* AppDelegate.swift */; };
 		45F529B61F3F911900A1EC4C /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 45F529B51F3F911900A1EC4C /* Actions.sks */; };
 		45F529BA1F3F911900A1EC4C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F529B91F3F911900A1EC4C /* GameViewController.swift */; };
@@ -54,6 +55,7 @@
 		454488121F3F91B30024F2D8 /* Score.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Score.mp3; sourceTree = "<group>"; };
 		454523F31F4710A70006CC57 /* GameplayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameplayScene.sks; sourceTree = "<group>"; };
 		454523F51F4711380006CC57 /* GameplayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplayScene.swift; sourceTree = "<group>"; };
+		45997AB51F557E1600EF75FF /* ColliderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColliderType.swift; sourceTree = "<group>"; };
 		45F529AE1F3F911900A1EC4C /* FlappyBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlappyBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F529B11F3F911900A1EC4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45F529B51F3F911900A1EC4C /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			children = (
 				451599721F54319F007595CB /* BirdClasses */,
 				454523F71F47113D0006CC57 /* SceneClasses */,
+				45997AB71F557E6F00EF75FF /* Physics */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -169,6 +172,14 @@
 				454523F51F4711380006CC57 /* GameplayScene.swift */,
 			);
 			name = SceneClasses;
+			sourceTree = "<group>";
+		};
+		45997AB71F557E6F00EF75FF /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				45997AB51F557E1600EF75FF /* ColliderType.swift */,
+			);
+			name = Physics;
 			sourceTree = "<group>";
 		};
 		45F529A51F3F911900A1EC4C = {
@@ -304,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				454523F61F4711380006CC57 /* GameplayScene.swift in Sources */,
+				45997AB61F557E1600EF75FF /* ColliderType.swift in Sources */,
 				45F529BA1F3F911900A1EC4C /* GameViewController.swift in Sources */,
 				451599741F5431B1007595CB /* Bird.swift in Sources */,
 				45F529B21F3F911900A1EC4C /* AppDelegate.swift in Sources */,

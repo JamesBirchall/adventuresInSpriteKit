@@ -34,6 +34,10 @@ class GameplayScene: SKScene {
         moveBackgroundsAndGrounds()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        bird.flap()
+    }
+    
     // MARK: - Initialise
     private func initialise() {
         
@@ -69,6 +73,15 @@ class GameplayScene: SKScene {
             ground.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             let yPosition = -(frame.size.height / 2)    // half the size of the screen and negative
             ground.position = CGPoint(x: i * Int(ground.size.width), y: Int(yPosition))
+            
+            ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
+            ground.physicsBody?.affectedByGravity = false
+            ground.physicsBody?.isDynamic = false
+            ground.physicsBody?.categoryBitMask = ColliderType.ground
+            // setup on 1 physics body is needed only
+//            ground.physicsBody?.collisionBitMask = ColliderType.bird
+//            ground.physicsBody?.contactTestBitMask = ColliderType.bird
+            
             addChild(ground)
         }
     }
