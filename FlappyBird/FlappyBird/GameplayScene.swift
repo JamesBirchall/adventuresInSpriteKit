@@ -11,10 +11,13 @@ import SpriteKit
 class GameplayScene: SKScene {
     
     private var bird: Bird!
+    private var pipesHolder: SKNode!
     
     private enum imageNames: String {
         case BackgroundSpriteNode
         case GroundSpriteNode
+        case PipesHolderName
+        case Pipe
     }
     
     let daytime: Bool = {
@@ -43,6 +46,7 @@ class GameplayScene: SKScene {
         
         createBackgrounds()
         createGround()
+        spawnPipes()
         createBird()
     }
     
@@ -114,5 +118,63 @@ class GameplayScene: SKScene {
                 }
             }
         }
+    }
+    
+    private func createPipes() {
+        
+        pipesHolder = SKNode()
+        pipesHolder.name = imageNames.PipesHolderName.rawValue
+        
+        let pipeUp = SKSpriteNode(imageNamed: "Pipe 1")
+        let pipeDown = SKSpriteNode(imageNamed: "Pipe 1")
+        
+        pipeUp.name = imageNames.Pipe.rawValue
+        pipeUp.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        pipeUp.position = CGPoint(x: 0, y: 500)
+        pipeUp.zRotation = CGFloat.pi
+        
+        pipeUp.physicsBody = SKPhysicsBody(rectangleOf: pipeUp.size)
+        pipeUp.physicsBody?.categoryBitMask = ColliderType.pipe
+        pipeUp.physicsBody?.affectedByGravity = false
+        pipeUp.physicsBody?.isDynamic = false
+        
+        pipeDown.name = imageNames.Pipe.rawValue
+        pipeDown.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        pipeDown.position = CGPoint(x: 0, y: -500)
+        
+        pipeDown.physicsBody = SKPhysicsBody(rectangleOf: pipeUp.size)
+        pipeDown.physicsBody?.categoryBitMask = ColliderType.pipe
+        pipeDown.physicsBody?.affectedByGravity = false
+        pipeDown.physicsBody?.isDynamic = false
+        
+        pipesHolder.addChild(pipeUp)
+        pipesHolder.addChild(pipeDown)
+        
+        pipesHolder.zPosition = 5
+        
+        pipesHolder.position.x = frame.size.width + 100
+        pipesHolder.position.y = 0
+        
+        addChild(pipesHolder)
+        
+        let destination = frame.width * 2
+        
+        let moveAction = SKAction.moveTo(x: -destination, duration: 10)
+        let removeAction = SKAction.removeFromParent()
+        
+        pipesHolder.run(SKAction.sequence([moveAction, removeAction]), withKey: "MoveRemoveActions")
+    }
+    
+    private func spawnPipes() {
+        let spawnAction = SKAction.run {
+            [weak self] in
+            self?.createPipes()
+        }
+        
+        let delayAction = SKAction.wait(forDuration: 3)
+        
+        let sequenceAction = SKAction.sequence([spawnAction, delayAction])
+        
+        self.run(SKAction.repeatForever(sequenceAction), withKey: "SpawnPipesActions")
     }
 }
